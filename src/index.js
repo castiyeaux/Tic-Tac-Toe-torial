@@ -44,19 +44,19 @@ class Board extends React.Component {
         return row;
     }
 
+    renderBoard(k) {
+        let board = [];
+        for(let m = 0; m < k; m += 3) {
+            board.push(<div className="board-row">{this.renderRow(m)}</div>);
+        }
+        return board;
+    }
+
     render() {
         return (
             <div>
                 <div className="better-board">
-                    <div className="board-row">
-                        {this.renderRow(0)}
-                    </div>
-                    <div className="board-row">
-                        {this.renderRow(3)}
-                    </div>
-                    <div className="board-row">
-                        {this.renderRow(6)}
-                    </div>
+                    {this.renderBoard(9)}
                 </div>
             </div>
         );
