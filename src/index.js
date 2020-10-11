@@ -35,15 +35,12 @@ class Board extends React.Component {
         );
     }
 
-    renderBoard() {
+    renderRow(j) {
         let row = [];
-        for(let i = 1; i < 4; i++) {
-            for(let j = 0; j < 3; j++) {
-                if(i % 3 === 0) {
-                    row.push(this.renderSquare(i));
-                }
-            }
+        for(let i = j; i <= j + 2; i++) {
+            row.push(this.renderSquare(i));
         }
+
         return row;
     }
 
@@ -51,9 +48,16 @@ class Board extends React.Component {
         return (
             <div>
                 <div className="better-board">
-                    {this.renderBoard()}
+                    <div className="board-row">
+                        {this.renderRow(0)}
+                    </div>
+                    <div className="board-row">
+                        {this.renderRow(3)}
+                    </div>
+                    <div className="board-row">
+                        {this.renderRow(6)}
+                    </div>
                 </div>
-                Row: {JSON.stringify(this.renderBoard)}
             </div>
         );
     }
