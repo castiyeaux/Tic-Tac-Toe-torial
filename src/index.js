@@ -13,17 +13,25 @@ import './index.css';
             }
         }
     */
-function Square(props) {
+const Square = React.forwardRef((props, ref) => {
+    // let [bgColor] = React.useState('pink');
+
     return (
         <button
             className="square"
             onClick={props.onClick}
-            style={{color: props.value === 'X' ? 'red' : 'blue'}}
+            style={{
+                color: props.value === 'X' ? 'red' : 'blue',
+                backgroundColor: 'pink'
+            }}
+            ref={ref}
         >
             {props.value}
         </button>
     );
-}
+});
+
+const ref = React.createRef();
 
 class Board extends React.Component {
     renderSquare(i) {
@@ -31,6 +39,7 @@ class Board extends React.Component {
             <Square
                 value={this.props.squares[i]}
                 onClick={() => this.props.onClick(i)}
+                ref={ref}
             />
         );
     }
@@ -53,6 +62,8 @@ class Board extends React.Component {
     }
 
     render() {
+        // let winSquare = this.board;
+        // Square.backgroundColor = this.props.winSquare.history.squares === 'X' ? 'yellow' : this.current.squares === 'O' ? 'green' : 'white';
         return (
             <div>
                 <div className="better-board">
@@ -66,6 +77,7 @@ class Board extends React.Component {
 class Game extends React.Component {
     constructor(props) {
         super(props);
+        // this.winner = React.createRef();
         this.state = {
             history: [{
                 squares: Array(9).fill(null)
@@ -135,6 +147,10 @@ class Game extends React.Component {
         let last = 'Previous Player: ';
         let first = (this.state.stepNumber === 0) ? null : prev;
         const winner = calculateWinner(current.squares);
+
+        // let board = new Board(); // Definitely Board Class varible fuq
+
+
         let status;
         if (winner) {
             status = 'Winner: ';
@@ -151,12 +167,17 @@ class Game extends React.Component {
                     <Board
                         squares={current.squares}
                         onClick={(i) => this.handleClick(i)}
+                        ref={ref}
                     />
                 </div>
                 <div className="game-info">
                     <div className="status">
                         {status}
-                        <span style={{color: (winner === 'X') || (next === 'X') ? 'red' : 'blue'}}>{winner ? winner : next}</span>
+                        <span style={{
+                            color: (winner === 'X') || (next === 'X') ? 'red' : 'blue'
+                            }}>
+                                {winner ? winner : next}
+                            </span>
                         <p>{last}<span style={{color: (prev === 'X') ? 'red' : 'blue'}}>{first}</span></p>
                         <p>Current Move #: {this.state.stepNumber}</p>
                     </div>
@@ -181,6 +202,9 @@ function calculateWinner(squares) {
     for (let i = 0; i < lines.length; i++) {
         const [a, b, c] = lines[i];
         if (squares[a] && ((squares[a] === squares[b]) && (squares[a] === squares[c]))) {
+            this.setState({
+                winColor: this.current.squares[i]
+            });
             return squares[a];
         }
     }
