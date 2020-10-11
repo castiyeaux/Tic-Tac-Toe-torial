@@ -56,8 +56,8 @@ ol, ul {
     margin: auto;
 }
 
-.og-board {
-    border: dashed 2px blue;
+.better-board {
+    border: dotted 2px purple;
     padding: 10px;
     margin: 10px;
 }
