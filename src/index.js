@@ -6,7 +6,8 @@ class Square extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            bgColor: 'pink'
+            bgColor: 'pink',
+            gameWon: false
         }
     }
 
@@ -27,11 +28,23 @@ class Square extends React.Component {
 }
 
 class Board extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            bgColor: 'orange'
+        }
+    }
+
     renderSquare(i) {
+        const props = this.props;
         return (
             <Square
                 value={this.props.squares[i]}
                 onClick={() => this.props.onClick(i)}
+                style={{
+                    backgroundColor: this.props.bgColor
+                }}
+                {...props}
             />
         );
     }
@@ -77,8 +90,11 @@ class Game extends React.Component {
             stepNumber: 0,
             column: 'column',
             row: 'row',
-            location: ' Move Location: (' + this.column + ', ' + this.row + ')'
+            location: ' Move Location: (' + this.column + ', ' + this.row + ')',
+            winColor: 'brown'
         };
+
+        // this.winner = this.winner.bind(this);
     }
 
     handleClick(i) {
@@ -138,7 +154,7 @@ class Game extends React.Component {
         let last = 'Previous Player: ';
         let first = (this.state.stepNumber === 0) ? null : prev;
         const winner = calculateWinner(current.squares);
-
+        // const winColor = (winner === 'X') ? 'yellow' : 'green';
 
         let status;
         if (winner) {
@@ -146,6 +162,9 @@ class Game extends React.Component {
             next = null;
             last = null;
             first = null;
+            this.setState({
+                gameWon: true
+            })
         } else {
             status = 'Next Player: ';
         }
@@ -156,6 +175,8 @@ class Game extends React.Component {
                     <Board
                         squares={current.squares}
                         onClick={(i) => this.handleClick(i)}
+                        winColor={this.state.winColor}
+                        onWin={this.winner}
                     />
                 </div>
                 <div className="game-info">
@@ -190,11 +211,6 @@ function calculateWinner(squares) {
     for (let i = 0; i < lines.length; i++) {
         const [a, b, c] = lines[i];
         if (squares[a] && ((squares[a] === squares[b]) && (squares[a] === squares[c]))) {
-            const winColor = (squares[a] === 'X') ? 'yellow' : 'green';
-            let square = new Square();
-            this.setState = {
-                bgColor: winColor
-            }
             return squares[a];
         }
     }
