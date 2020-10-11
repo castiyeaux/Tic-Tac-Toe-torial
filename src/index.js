@@ -2,36 +2,29 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-
-// Functional Compnent - Has no state, and only had a render method
-    /*
-        class Square extends React.Component {
-            render() {
-                return(
-                    ...
-                );
-            }
+class Square extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            bgColor: 'pink'
         }
-    */
-const Square = React.forwardRef((props, ref) => {
-    // let [bgColor] = React.useState('pink');
+    }
 
-    return (
-        <button
-            className="square"
-            onClick={props.onClick}
-            style={{
-                color: props.value === 'X' ? 'red' : 'blue',
-                backgroundColor: 'pink'
-            }}
-            ref={ref}
-        >
-            {props.value}
-        </button>
-    );
-});
-
-const ref = React.createRef();
+    render() {
+        return (
+            <button
+                className="square"
+                onClick={this.props.onClick}
+                style={{
+                    color: this.props.value === 'X' ? 'red' : 'blue',
+                    backgroundColor: this.state.bgColor
+                }}
+            >
+                {this.props.value}
+            </button>
+        );
+    }
+}
 
 class Board extends React.Component {
     renderSquare(i) {
@@ -39,7 +32,6 @@ class Board extends React.Component {
             <Square
                 value={this.props.squares[i]}
                 onClick={() => this.props.onClick(i)}
-                ref={ref}
             />
         );
     }
@@ -77,7 +69,6 @@ class Board extends React.Component {
 class Game extends React.Component {
     constructor(props) {
         super(props);
-        // this.winner = React.createRef();
         this.state = {
             history: [{
                 squares: Array(9).fill(null)
@@ -148,8 +139,6 @@ class Game extends React.Component {
         let first = (this.state.stepNumber === 0) ? null : prev;
         const winner = calculateWinner(current.squares);
 
-        // let board = new Board(); // Definitely Board Class varible fuq
-
 
         let status;
         if (winner) {
@@ -167,7 +156,6 @@ class Game extends React.Component {
                     <Board
                         squares={current.squares}
                         onClick={(i) => this.handleClick(i)}
-                        ref={ref}
                     />
                 </div>
                 <div className="game-info">
@@ -202,9 +190,11 @@ function calculateWinner(squares) {
     for (let i = 0; i < lines.length; i++) {
         const [a, b, c] = lines[i];
         if (squares[a] && ((squares[a] === squares[b]) && (squares[a] === squares[c]))) {
-            this.setState({
-                winColor: this.current.squares[i]
-            });
+            const winColor = (squares[a] === 'X') ? 'yellow' : 'green';
+            let square = new Square();
+            this.setState = {
+                bgColor: winColor
+            }
             return squares[a];
         }
     }
