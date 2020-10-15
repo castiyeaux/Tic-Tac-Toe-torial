@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Game {
@@ -22,7 +23,7 @@ public class Game {
         playerSymbol = "X";
         while(!checkWin()){
             playerMove(playerSymbol);
-
+            displayBoard();
         }
     }
 
@@ -41,11 +42,43 @@ public class Game {
         return false;
     }
 
-    private  void playerMove(String s){
+    private void playerMove(String s){
         //Do button on click to square if no symbol
-        //TODO
+        Scanner scan = new Scanner(System.in);
+        boolean help = false;
+
+        while(!help){
+            String input = scan.nextLine();
+            String[] coordArray = input.split(",");
+            // System.out.println("Do you want to play this move at " + Arrays.toString(coordArray) + " .");
+            // while(s)
+            ArrayList<Square> squaresList = b.getSquares();
+            Square square = squaresList.get(Integer.parseInt(coordArray[0]) * 3 + Integer.parseInt(coordArray[1]));
+            if(square.getSymbol().equals("")) {
+                square.setSymbol(s);
+                help = true;
+            }
+            else {
+                System.out.println("Input new coordinates");
+            }
+        }
+
         //Then change player whose turn it is
         playerSymbol = playerSymbol.equals("X") ? "O" : "X";
 
+    }
+
+    private void displayBoard() {
+        ArrayList<Square> squaresList = b.getSquares();
+        System.out.println("| " + squaresList.get(0).getSymbol() + " | " + squaresList.get(1).getSymbol() + " | " + squaresList.get(2).getSymbol() + " |");
+        System.out.println("------------");
+        System.out.println("| " + squaresList.get(3).getSymbol() + " | " + squaresList.get(4).getSymbol() + " | " + squaresList.get(5).getSymbol() + " |");
+        System.out.println("------------");
+        System.out.println("| " + squaresList.get(6).getSymbol() + " | " + squaresList.get(7).getSymbol() + " | " + squaresList.get(8).getSymbol() + " |");
+        System.out.println("------------");
+    }
+
+    public static void main(String[] args) {
+        Game g = new Game();
     }
 }
