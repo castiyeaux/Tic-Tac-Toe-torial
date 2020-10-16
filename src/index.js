@@ -66,6 +66,11 @@ class Board extends React.Component {
         return board;
     }
 
+    // !! LOOK HERE
+    getBoard() {
+        return board;
+    }
+
     render() {
         // let winSquare = this.board;
         // Square.backgroundColor = this.props.winSquare.history.squares === 'X' ? 'yellow' : this.current.squares === 'O' ? 'green' : 'white';
