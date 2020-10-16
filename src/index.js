@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class Square extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            bgColor: 'pink',
-            gameWon: false
-        }
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         bgColor: 'pink',
+    //         gameWon: false
+    //     }
+    // }
 
     render() {
         return (
@@ -18,7 +18,8 @@ class Square extends React.Component {
                 onClick={this.props.onClick}
                 style={{
                     color: this.props.value === 'X' ? 'red' : 'blue',
-                    backgroundColor: this.state.bgColor
+                    // backgroundColor: this.state.bgColor
+                    backgroundColor: 'pink'
                 }}
             >
                 {this.props.value}
@@ -28,12 +29,12 @@ class Square extends React.Component {
 }
 
 class Board extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            bgColor: 'orange'
-        }
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         bgColor: 'orange'
+    //     }
+    // }
 
     renderSquare(i) {
         const props = this.props;
@@ -67,9 +68,9 @@ class Board extends React.Component {
     }
 
     // !! LOOK HERE
-    getBoard() {
-        return board;
-    }
+    // getBoard() {
+    //     return board;
+    // }
 
     render() {
         // let winSquare = this.board;
@@ -126,14 +127,14 @@ class Game extends React.Component {
             xIsNext: !this.state.xIsNext,
             stepNumber: history.length
         });
-    }
+    } // end handleClick()
 
     jumpTo(step) {
         this.setState({
             stepNumber: step,
             xIsNext: (step % 2) === 0
         });
-    }
+    } // end jumpTo()
 
     render() {
         const history = this.state.history;
@@ -199,8 +200,8 @@ class Game extends React.Component {
                 </div>
             </div>
         );
-    }
-}
+    } // end render()
+} // end Game Class
 
 function calculateWinner(squares) {
     const lines = [
@@ -220,7 +221,7 @@ function calculateWinner(squares) {
         }
     }
     return null;
-}
+} // end calculateWinner()
 
 // ========================================
 
