@@ -2,17 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-
-// Functional Component - Has no state, and only had a render method
-    /*
-        class Square extends React.Component {
-            render() {
-                return(
-                    ...
-                );
-            }
-        }
-    */
 // function Square(props) {
 //     return (
 //         <button
