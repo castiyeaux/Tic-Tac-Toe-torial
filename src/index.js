@@ -1,74 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-
-// function Square(props) {
-//     return (
-//         <button
-//             className="square"
-//             onClick={props.onClick}
-//             style={{color: props.value === 'X' ? 'red' : 'blue'}}
-//         >
-//             {props.value}
-//         </button>
-//     );
-// }
-class Square extends React.Component {
-    render() {
-        return (
-            <button
-                className="square"
-                onClick={() => this.props.onClick()}
-                style={{
-                    color: this.props.value === 'X' ? 'red' : 'blue',
-                    backgroundColor: (this.props.winner && this.props.winner.winnerCombo.includes(this.props.index)) ? 'yellow' : 'white'
-                }}
-            >
-                {this.props.value}
-            </button>
-        );
-    }
-}
-
-class Board extends React.Component {
-    renderSquare(i) {
-        return (
-            <Square
-                value={this.props.squares[i]}
-                onClick={() => this.props.onClick(i)}
-                winner={this.props.winner}
-                index={i}
-            />
-        );
-    }
-
-    renderRow(j) {
-        let row = [];
-        for(let i = j; i <= j + 2; i++) {
-            row.push(this.renderSquare(i));
-        }
-
-        return row;
-    }
-
-    renderBoard(k) {
-        let board = [];
-        for(let m = 0; m < k; m += 3) {
-            board.push(<div className="board-row">{this.renderRow(m)}</div>);
-        }
-        return board;
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="better-board">
-                    {this.renderBoard(9)}
-                </div>
-            </div>
-        );
-    }
-}
+import Board from './Board';
 
 class Game extends React.Component {
     constructor(props) {
@@ -157,12 +90,6 @@ class Game extends React.Component {
             status = 'Next Player: ';
         }
 
-        // const divClass = ({
-        //     "winner": this.winner,
-        //     "draw": (moveNumber === 9),
-        //     "status": true
-        // })
-
         return (
             <div className="game">
                 <div className="game-board">
@@ -173,14 +100,9 @@ class Game extends React.Component {
                     />
                 </div>
                 <div className="game-info">
-                    <div className="status">
+                    <div>
                         <div
-                            style={{
-                                border: winner ? "solid 5px green" : (moveNumber === 9) ? "solid 5px gray" : null,
-                                padding: winner ? "20px" : (moveNumber === 9) ? "20px" : null,
-                                textAlign: winner ? "center" : (moveNumber === 9) ? "center" : null,
-                                fontSize: winner ? "xx-large" : (moveNumber === 9) ? "xx-large" : null
-                            }}
+                            className={winner ? "winner" : (moveNumber === 9) ? "draw" : "status"}
                         >
                             {status}
                             <span

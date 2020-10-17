@@ -1,9 +1,8 @@
 body {
     font: 16px "IBM Plex Sans", Futura, sans-serif;
-    margin: 20px;
     zoom: 150%;
-    border: double 4px #B10000;
-    padding: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 ol, ul {
@@ -46,6 +45,9 @@ ol, ul {
 .game {
     display: flex;
     flex-direction: column;
+    border: double 4px #B10000;
+    margin: 20px;
+    padding: 10px;
 }
 
 .game-info {
@@ -54,6 +56,7 @@ ol, ul {
 
 .game-board {
     margin: auto;
+    zoom: 150%;
 }
 
 .better-board {
