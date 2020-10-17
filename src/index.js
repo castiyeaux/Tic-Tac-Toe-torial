@@ -3,6 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Board from './Board';
 
+function Game(props) {
+    const [history, setHistory] = useState([{squares: Array(9).fill(null)}]);
+    // const [squares, setSquares] = useState(Array(9).fill(null));
+    const [xIsNext, setXIsNext] = useState(true);
+    const [stepNumber, setStepNumber] = useState(0);
+    const [column, setColumn] = useState('column');
+    const [row, setRow] = useState('row');
+    const [location, setLocation] = useState(' Move Location: (' + column + ',' + row + ')');
+
+
+}
+
 class Game extends React.Component {
     constructor(props) {
         super(props);
