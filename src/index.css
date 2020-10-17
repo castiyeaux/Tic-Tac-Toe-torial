@@ -61,3 +61,17 @@ ol, ul {
     padding: 10px;
     margin: 10px;
 }
+
+.winner {
+    border: solid 5px green;
+    padding: 20px;
+    text-align: center;
+    font-size: xx-large;
+}
+
+.draw {
+    border: solid 5px gray;
+    padding: 20px;
+    text-align: center;
+    font-size: xx-large;
+}

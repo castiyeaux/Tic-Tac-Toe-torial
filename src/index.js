@@ -153,15 +153,26 @@ class Game extends React.Component {
         let last = 'Previous Player: ';
         let first = (this.state.stepNumber === 0) ? null : prev;
         const winner = calculateWinner(current.squares);
+        const moveNumber = this.state.stepNumber;
         let status;
         if (winner) {
             status = 'Winner: ';
             next = null;
             last = null;
             first = null;
-        } else {
+        }
+        else if(moveNumber === 9) {
+            status = 'No Winner: DRAW!'
+        }
+        else {
             status = 'Next Player: ';
         }
+
+        // const divClass = ({
+        //     "winner": this.winner,
+        //     "draw": (moveNumber === 9),
+        //     "status": true
+        // })
 
         return (
             <div className="game">
@@ -174,14 +185,23 @@ class Game extends React.Component {
                 </div>
                 <div className="game-info">
                     <div className="status">
-                        {status}
-                        <span
+                        <div
                             style={{
-                                color: (winner && winner.winnerSymbol === 'X') || (next === 'X') ? 'red' : 'blue'
+                                border: winner ? "solid 5px green" : (moveNumber === 9) ? "solid 5px gray" : null,
+                                padding: winner ? "20px" : (moveNumber === 9) ? "20px" : null,
+                                textAlign: winner ? "center" : (moveNumber === 9) ? "center" : null,
+                                fontSize: winner ? "xx-large" : (moveNumber === 9) ? "xx-large" : null
                             }}
                         >
-                            {winner ? winner.winnerSymbol : next}
-                        </span>
+                            {status}
+                            <span
+                                style={{
+                                    color: (winner && winner.winnerSymbol === 'X') || (next === 'X') ? 'red' : 'blue'
+                                }}
+                            >
+                                {winner ? winner.winnerSymbol : (moveNumber === 9) ? null : next}
+                            </span>
+                        </div>
                         <p>{last}<span style={{color: (prev === 'X') ? 'red' : 'blue'}}>{first}</span></p>
                         <p>Current Move #: {this.state.stepNumber}</p>
                     </div>
