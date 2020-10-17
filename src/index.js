@@ -3,38 +3,40 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Board from './Board';
 
-function Game(props) {
+function Game() {
     // Define State Variables
-    const [history, setHistory] = useState([{squares: Array(9).fill(null)}]);
-    // const [squares, setSquares] = useState(Array(9).fill(null));
+    const [history, setHistory] = useState([{
+        squares: Array(9).fill(null),
+    }]);
     const [xIsNext, setXIsNext] = useState(true);
     const [stepNumber, setStepNumber] = useState(0);
-    const [column, setColumn] = useState('column');
-    const [row, setRow] = useState('row');
-    const [location, setLocation] = useState(' Move Location: (' + column + ',' + row + ')');
 
     function handleClick(i) {
         const history1 = history.slice(0, stepNumber + 1);
-        const current1 = history1[history.length - 1];
+        const current1 = history1[history1.length - 1];
         const squares1 = current1.squares.slice();
         if(calculateWinner(squares1) || squares1[i]) {
             return;
         }
         squares1[i] = xIsNext ? 'X' : 'O';
 
-        const column1 = ((i=== 0) || (i === 3) || (i=== 6)) ? '1' : ((i === 1) || (i === 4) || (i === 7)) ? '2' : '3';
+        const column1 = (i % 3) + 1;
 
-        const row1 = ((i === 0) || (i === 1) || (i === 2)) ? '1' : ((i === 3) || (i === 4) || (i === 5)) ? '2' : '3';
+        const row1 = Math.floor(i / 3) + 1;
 
-        setHistory((history.concat([{
+        console.log(0/3);
+        console.log(1/3);
+        console.log(2/3);
+
+        setHistory((history1.concat([{
             squares: squares1,
             exOh: xIsNext ? 'X' : 'O',
-            column: setColumn(column1),
-            row: setRow(row1),
-            location: setLocation(' Move Location: (' + column + ',' + row + ')')
+            column: column1,
+            row: row1,
+            location: ' Move Location: (' + column1 + ',' + row1 + ')'
         }])));
         setXIsNext(!xIsNext);
-        setStepNumber(history.length);
+        setStepNumber(history1.length);
     } // end handleClick()
 
     function jumpTo(step) {
