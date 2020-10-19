@@ -24,10 +24,6 @@ function Game() {
 
         const row1 = Math.floor(i / 3) + 1;
 
-        console.log(0/3);
-        console.log(1/3);
-        console.log(2/3);
-
         setHistory((history1.concat([{
             squares: squares1,
             exOh: xIsNext ? 'X' : 'O',

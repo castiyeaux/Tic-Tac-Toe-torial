@@ -3,6 +3,7 @@ body {
     zoom: 150%;
     display: flex;
     justify-content: center;
+    background-color: black;
 }
 
 ol, ul {
