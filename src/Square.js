@@ -6,8 +6,8 @@ function Square(props) {
             className="square"
             onClick={() => props.onClick()}
             style={{
-                color: props.value === 'X' ? 'red' : 'blue',
-                backgroundColor: (props.winner && props.winner.winnerCombo.includes(props.index)) ? 'yellow' : 'white'
+                color: props.value === 'X' ? 'rgb(134, 2, 2)' : 'rgb(5, 3, 139)',
+                backgroundColor: (props.winner && props.winner.winnerCombo.includes(props.index)) ? 'yellow' : 'black'
             }}
         >
             {props.value}
